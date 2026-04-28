@@ -1,56 +1,60 @@
--> docker ps == lists all the running containers == ps- process state
--> docker ps -a == lists all the running and stopped containers
--> docker rm name/id == removes that container from the list
--> docker stop name/id == stops the running container
--> docker image prune == Remove unused images
--> docker container prune == Removes all stopped containers
--> docker history [NAME/ID] == Show the history of an image
--> docker rename NAME-OLD NAME-NEW == Rename a container
--> docker cp [NAME]:/PATH /local/path == container -> host == copy files/directories between host and container
--> docker info
+# Docker notes
 
-#Flags are options you add to a command to change its behavior ex: -a,-d..
+-> docker ps == lists all the running containers == ps- process state<br>
+-> docker ps -a == lists all the running and stopped containers<br>
+-> docker rm name/id == removes that container from the list<br>
+-> docker stop name/id == stops the running container<br>
+-> docker image prune == Remove unused images<br>
+-> docker container prune == Removes all stopped containers<br>
+-> docker history [NAME/ID] == Show the history of an image<br>
+-> docker rename NAME-OLD NAME-NEW == Rename a container<br>
+-> docker cp [NAME]:/PATH /local/path == container -> host == copy files/directories between host and container<br>
+-> docker info<br>
 
--> docker images == lists all the images present
--> docker rmi name == will remove the image from the list
-@before removing images you need to remove the dependent conatiners and then rm image
-// before removing u must remove all dependent containers of that image//
--> docker run name == will pull and run the image directly
--> docker run redis:4.0 == ':' called tag will run a specified version
--> docker pull name == will only pull and store it in our host, it wont run the image
--> docker stop name == will kill/force stop the running conatiner
+@Flags are options you add to a command to change its behavior ex: -a,-d..<br>
 
-@Images:
-Images are read-only templates containing instructions for creating a container. A Docker image creates containers to run on the Docker platform. Think of an image like a blueprint or snapshot of what will be in a container when it runs.
+-> docker images == lists all the images present<br>
+-> docker rmi name == will remove the image from the list<br>
 
-** -a : List all images (parents & intermediates)
-** -q : Return only the ID of each image
-\*\* -l : Return the last container
+@before removing images you need to remove the dependent conatiners and then rm image<br>
+// before removing u must remove all dependent containers of that image//<br>
+-> docker run name == will pull and run the image directly<br>
+-> docker run redis:4.0 == ':' called tag will run a specified version<br>
+-> docker pull name == will only pull and store it in our host, it wont run the image<br>
+-> docker stop name == will kill/force stop the running conatiner<br>
+
+##Images:
+Images are read-only templates containing instructions for creating a container. A Docker image creates containers to run on the Docker platform. Think of an image like a blueprint or snapshot of what will be in a container when it runs.<br>
+
+** -a : List all images (parents & intermediates)<br>
+** -q : Return only the ID of each image<br>
+\*\* -l : Return the last container<br>
 
 @Containers:
-A container is an isolated place where an application runs without affecting the rest of the system and without the system impacting the application.
+A container is an isolated place where an application runs without affecting the rest of the system and without the system impacting the application.<br>
 
---rm : Remove the container when it is stopped
--i : Keep standard output stream open
--t : Run the container in a pseudo-TTY [interactive mode]
--d : Run the container in the background [detach mode]
--p PORTS : Publish or expose ports
--net : Connect a container to a network
--ip : Assign a static IP to containers (you must specify subnet block for the network)
+--rm : Remove the container when it is stopped<br>
+-i : Keep standard output stream open<br>
+-t : Run the container in a pseudo-TTY [interactive mode]<br>
+-d : Run the container in the background [detach mode]<br>
+-p PORTS : Publish or expose ports<br>
+-net : Connect a container to a network<br>
+-ip : Assign a static IP to containers (you must specify subnet block for the network)<br>
 
--> docker run ubuntu sleep 10 == keep this process alive without doing anything(ubuntu is just image it doesn't have any process in it to run) -> used to check logs, delay execution, keeps container alive temp -> without this sleep cmd as the image wont have anything to run it will exit immediately.
+-> docker run ubuntu sleep 10 == keep this process alive without doing anything(ubuntu is just image it doesn't have any process in it to run) -> used to check logs, delay execution, keeps container alive temp -> without this sleep cmd as the image wont have anything to run it will exit immediately.<br>
 
--> docker exec <container_id> <command> == Uses an existing running container and Runs an additional command inside it
+-> docker exec <container_id> <command> == Uses an existing running container and Runs an additional command inside it<br>
 
 -> docker run -d //name -> start machine and walk away (detach) //runs in the background
--> docker attach //first few no's -> come back and sit again (attach)//connects to running container
+-> docker attach //first few no's -> come back and sit again (attach)//connects to running container<br>
 
--> docker run -it centos bash == "Start a Centos container and give me a terminal inside it"
-This is actually two flags combined:
--i -> interactive
-Keeps standard input open (so you can type)
--t -> terminal
-Gives you a proper terminal interface
+-> docker run -it centos bash == "Start a Centos container and give me a terminal inside it"<br>
+
+- This is actually two flags combined:<br>
+- -i -> interactive
+  - Keeps standard input open (so you can type)
+- -t -> terminal
+  - Gives you a proper terminal interface<br>
 
 @port mapping
 -> docker run -p 80:5000 webapp == <host_port>:<container_port> (port on ur computer):(post inside the container)
