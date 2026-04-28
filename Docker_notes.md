@@ -115,34 +115,35 @@ a webapp running on port 5000 inside container which cant be used by the user, n
 
 ## Tool to define and run multiple containers using a single YAML file<br>
 
-================docker-compose.yml================
-version: '3'
+## ================docker-compose.yml================<br>
 
-services:
+version: '3'<br>
 
-vote:
-image: voting-app || build : ./vote == it will first build the image and give temp name and use it
-ports: - "5000:80"
-depends_on: - redis
+services:<br>
 
-redis:
-image: redis
+vote:<br>
+image: voting-app || build : ./vote == it will first build the image and give temp name and use it<br>
+ports: - "5000:80"<br>
+depends_on: - redis<br>
 
-worker:
-image: worker || build: ./worker
-depends_on: - redis - db
+redis:<br>
+image: redis<br>
 
-db:
-image: postgres
-environment:
-POSTGRES_USER: postgres
-POSTGRES_PASSWORD: postgres
-POSTGRES_DB: votes
+worker:<br>
+image: worker || build: ./worker<br>
+depends_on: - redis - db<br>
 
-result:
-image: result-app || build: ./result-app
-ports: - "5001:80"
-depends_on: - db
+db:<br>
+image: postgres<br>
+environment:<br>
+POSTGRES_USER: postgres<br>
+POSTGRES_PASSWORD: postgres<br>
+POSTGRES_DB: votes<br>
+
+result:<br>
+image: result-app || build: ./result-app<br>
+ports: - "5001:80"<br>
+depends_on: - db<br>
 
 ---
 
