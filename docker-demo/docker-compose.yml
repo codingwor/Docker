@@ -1,0 +1,28 @@
+# Version of the Compose file format
+version: "3.8"
+
+# Define the containers (services) that make up your application
+services:
+  # --- Service 1: Your Flask web app ---
+  web:
+    # Build an image using the Dockerfile in the current directory (.)
+    build: .
+
+    # Map port 5000 on YOUR computer (host) to port 5000 INSIDE the container
+    # Format: "HOST_PORT:CONTAINER_PORT"
+    ports:
+      - "5000:5000"
+
+    # Mount your local folder into the container's /app folder
+    # Lets you edit code locally and see changes without rebuilding the image
+    volumes:
+      - .:/app
+
+    # This service depends on 'redis' — Compose starts redis first
+    depends_on:
+      - redis
+
+  # --- Service 2: Redis database ---
+  redis:
+    # Pull the official Redis image from Docker Hub (no custom build needed)
+    image: "redis:alpine"
