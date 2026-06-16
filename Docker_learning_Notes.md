@@ -797,6 +797,28 @@ my-project/
 
 ---
 
+### How to run the project
+
+```
+# Build images and start both containers in the foreground
+docker-compose up
+
+# Or run in background (detached mode)
+docker-compose up -d
+```
+
+Then open http://localhost:5000 in your browser — refresh a few times and watch the counter increase (proving the Flask container and Redis container are communicating).
+
+```
+# Stop and remove containers, networks created by 'up'
+docker-compose down
+
+# Stop and ALSO delete the Redis data volume (full reset)
+docker-compose down -v
+```
+
+---
+
 ## 📖 Learning Path for Beginners
 
 1. ✅ **Run your first container:** `docker run hello-world`
